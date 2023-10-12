@@ -3,7 +3,7 @@ package com.hcc.entities;
 public class Assignment {
     private long id;
     private String status;
-    private int number;
+    private long number;
     private String githubUrl;
     private String branch;
     private String reviewVideoUrl;
@@ -46,11 +46,11 @@ public class Assignment {
         this.status = status;
     }
 
-    public int getNumber() {
+    public long getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(long number) {
         this.number = number;
     }
 

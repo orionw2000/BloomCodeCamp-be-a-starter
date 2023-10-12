@@ -3,14 +3,13 @@ package com.hcc.entities;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
-
 public class User implements UserDetails {
     private long id;
-    private Date cohortStartDate;
+    private LocalDate cohortStartDate;
     private String username;
     private String password;
     private List<Authority> authorities;
@@ -18,7 +17,7 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(Date cohortStartDate,
+    public User(LocalDate cohortStartDate,
                 String username,
                 String password,
                 List<Authority> authorities) {
@@ -28,7 +27,6 @@ public class User implements UserDetails {
         this.password = password;
         this.authorities = authorities;
     }
-
     public long getId() {
         return id;
     }
@@ -37,11 +35,11 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public Date getCohortStartDate() {
+    public LocalDate getCohortStartDate() {
         return cohortStartDate;
     }
 
-    public void setCohortStartDate(Date cohortStartDate) {
+    public void setCohortStartDate(LocalDate cohortStartDate) {
         this.cohortStartDate = cohortStartDate;
     }
 
@@ -56,7 +54,7 @@ public class User implements UserDetails {
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
     }
-    
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

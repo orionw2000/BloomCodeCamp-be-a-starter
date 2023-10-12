@@ -1,4 +1,6 @@
 package com.hcc.enums;
 
-public class AssignmentStatusEnum {
+public enum AssignmentStatusEnum {
+    ACTIVE,
+    INACTIVE
 }

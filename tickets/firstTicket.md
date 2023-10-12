@@ -75,7 +75,7 @@ Your job is to begin work on the LMS by setting up the domain objects shown abov
 ```Java
 package com.hcc.services;
 
-import com.hcc.entities.User;
+import com.hcc.endpoints.models.UserTable;
 import com.hcc.utils.CustomPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

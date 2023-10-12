@@ -1,7 +1,7 @@
 package com.hcc.utils;
 
 
-import com.hcc.entities.User;
+import com.hcc.endpoints.models.UserTable;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.function.Function;
-
+//this class was made before my second ticket. ill leave it here, and implement a new class: JWTUtil.java
 @Component
 public class JWTUtils {
 
@@ -53,7 +53,7 @@ public class JWTUtils {
     }
 
     //generate token
-    public String generateToken(User user){
+    public String generateToken(UserTable user){
         return doGenerateToken(user.getUsername());
 
     }

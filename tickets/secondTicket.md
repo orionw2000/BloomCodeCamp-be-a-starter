@@ -53,7 +53,7 @@ implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 ```java
 package com.hcc.utils;
 
-import com.hcc.entities.User;
+import com.hcc.endpoints.models.UserTable;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -262,7 +262,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 ```java
 package com.hcc.repositories;
 
-import com.hcc.entities.User;
+import com.hcc.endpoints.models.UserTable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -279,7 +279,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 ```Java
 package com.hcc.services;
 
-import com.hcc.entities.User;
+import com.hcc.endpoints.models.UserTable;
 import com.hcc.repositories.UserRepository;
 import com.hcc.utils.CustomPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
