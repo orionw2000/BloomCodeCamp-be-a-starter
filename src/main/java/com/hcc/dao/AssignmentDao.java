@@ -21,13 +21,6 @@ public class AssignmentDao {
     }
 
     public List<AssignmentTable> getAssignmentByUser(long userId){
-        //List<AssignmentTable> assignmentsByUser = new ArrayList<>();
-        //AssignmentTable assignmentTable = new AssignmentTable();
-        //assignmentTable.setUserId(userId);
-        //assignmentsByUser.add(assignmentTable);
-        //
-        //Map<String, List<Object>> assignments = mapper.batchLoad(assignmentsByUser);
-        //TODO ask later
         Map<String, AttributeValue> expressionAttributeValues = new HashMap<>();
         expressionAttributeValues.put(":user_id", new AttributeValue().withN(String.valueOf(userId)));
         ScanRequest scanRequest = new ScanRequest()
@@ -35,7 +28,9 @@ public class AssignmentDao {
                 .withFilterExpression("userId = :user_id")
                 .withExpressionAttributeValues(expressionAttributeValues);
         ScanResult result = AmazonDynamoDBClientBuilder.defaultClient().scan(scanRequest);
-        
+        if(result.getItems().isEmpty()){
+            throw new ResourceNotFoundException("Assignments for user ID " + userId +" were not found.");
+        }
         List<Map<String, AttributeValue>> assignments = new ArrayList<>(result.getItems());
         List<AssignmentTable> listOfAssignmentsPerUser = new ArrayList<>();
         for(Map<String, AttributeValue> assignment : assignments){
@@ -60,7 +55,7 @@ public class AssignmentDao {
                 .withFilterExpression("id = :id")
                 .withExpressionAttributeValues(expressionAttributeValues);
         ScanResult result = AmazonDynamoDBClientBuilder.defaultClient().scan(scanRequest);
-        //Should only be 1 user.
+        //Should only be 1 assignment.
         Map<String, AttributeValue> assignment = new HashMap<>(result.getItems().get(1));
         AssignmentTable assignmentTable = new AssignmentTable();
         assignmentTable.setId(Long.parseLong(assignment.get("id").getN()));
@@ -71,9 +66,6 @@ public class AssignmentDao {
         assignmentTable.setUserId(Long.parseLong(assignment.get("user_id").getN()));
         assignmentTable.setCodeReviewerId(Long.parseLong(assignment.get("code_reviewer_id").getN()));
         return assignmentTable;
-        //what is validatetoken
-        //*JWT / when its created
-        //what parameters are needed for the post endpoint
     }
 
     public void saveAssignment(AssignmentTable assignment){

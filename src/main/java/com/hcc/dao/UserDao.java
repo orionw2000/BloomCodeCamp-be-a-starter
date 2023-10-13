@@ -37,9 +37,11 @@ public class UserDao {
                 .withFilterExpression("id = :id")
                 .withExpressionAttributeValues(expressionAttributeValues);
         ScanResult result = AmazonDynamoDBClientBuilder.defaultClient().scan(scanRequest);
+        if(result.getItems().isEmpty()){
+            throw new ResourceNotFoundException("User for id " + id + " was not found.");
+        }
         //Should only be 1 user.
         Map<String, AttributeValue> userMap = new HashMap<>(result.getItems().get(1));
-        //TODO null checks for other DAOs as well
         UserTable user = new UserTable();
         user.setPassword(userMap.get("password").getS());
         user.setUsername(userMap.get("username").getS());
